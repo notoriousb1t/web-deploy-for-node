@@ -1,0 +1,11 @@
+{
+  "name": "webhook-deploy-for-node",
+  "version": "1.0.0",
+  "description": "HTTP server that runs deployment scripts when a GET request is sent",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Christopher Wallis <christopher.j.wallis@gmail.com> (http://notoriousb1t.com)",
+  "license": "MIT"
+}
