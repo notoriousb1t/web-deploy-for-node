@@ -1,6 +1,19 @@
 {
   "author": "Christopher Wallis <christopher.j.wallis@gmail.com> (http://notoriousb1t.com)",
+  "bugs": {
+    "url": "https://github.com/notoriousb1t/web-deploy-for-node/issues"
+  },
   "description": "HTTP server that runs deployment scripts when a GET request is sent",
+  "keywords": [
+    "deploy",
+    "deployment",
+    "node",
+    "webhook",
+    "publish",
+    "node",
+    "git",
+    "github"
+  ],
   "license": "MIT",
   "name": "webhook-deploy-for-node",  
   "main": "server.js",
