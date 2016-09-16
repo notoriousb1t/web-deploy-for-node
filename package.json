@@ -1,11 +1,15 @@
 {
-  "name": "webhook-deploy-for-node",
-  "version": "1.0.0",
+  "author": "Christopher Wallis <christopher.j.wallis@gmail.com> (http://notoriousb1t.com)",
   "description": "HTTP server that runs deployment scripts when a GET request is sent",
+  "license": "MIT",
+  "name": "webhook-deploy-for-node",  
   "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/notoriousb1t/web-deploy-for-node"
+  },
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Christopher Wallis <christopher.j.wallis@gmail.com> (http://notoriousb1t.com)",
-  "license": "MIT"
+  "version": "1.0.0"
 }
