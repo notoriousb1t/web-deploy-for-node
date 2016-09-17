@@ -1,3 +1,5 @@
+'use strict';
+
 var http = require('http');
 const execSync = require('child_process').execSync;
 const deployOptions = require('./deploy.json');
