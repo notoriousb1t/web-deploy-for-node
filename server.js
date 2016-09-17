@@ -18,9 +18,9 @@ function handleRequest(req, resp) {
 	try {
 		const output = deploy(site);
 		output.forEach(o => {
-			resp.write('<p>');
-			resp.write(o.toString().replace(/\n/ig, '<br/>'));
-			resp.write('</p>');
+			resp.write('\n<p>');
+			resp.write(o.toString().replace(/\n/ig, '\n<br/>'));
+			resp.write('\n</p>');
 		});
 	} catch (err) {
 		responseError(resp, 500, err);
