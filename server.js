@@ -3,36 +3,57 @@
 var http = require('http');
 const execSync = require('child_process').execSync;
 const deployOptions = require('./deploy.json');
-const PORT = deployOptions.port; 
+const PORT = deployOptions.port;
+const threshold = 3000; 
+
+let lastUpdate = undefined;
+
+function shouldProcess() {
+	const now = Date.now();
+	if (lastUpdate === undefined) {
+		lastUpdate = now;
+		return true;
+	}
+	if (now - lastUpdate < threshold) {
+		return false;
+	}
+	lastUpdate = now;
+	return true;
+}
 
 function handleRequest(req, resp) {
 	const site = findSite(req.url);
 
+	if (!shouldProcess()) {
+		responseError(resp, 429, 'Too many requests');
+	}
 	if (site === undefined) {
 		responseError(resp, 404, '404: Not found');
 		return;
 	}
 
-	resp.writeHead(200, { "Content-Type": "text/html" });
-
 	try {
 		const output = deploy(site);
+		
+		let msg = '';
 		output.forEach(o => {
-			resp.write('\n<p>');
-			resp.write(o.toString().replace(/\n/ig, '\n<br/>'));
-			resp.write('\n</p>');
+			msg += '\n<p>';
+			msg += o.toString().replace(/\n/ig, '\n<br/>');
+			msg += '\n</p>';
 		});
+
+		resp.writeHead(200, { "Content-Type": "text/html" });
+		resp.write(msg);
+		resp.end();
 	} catch (err) {
-		responseError(resp, 500, err);
+		responseError(resp, 500, err.message);
 		return;
 	}
-
-    resp.end();
 }
 
 function responseError(resp, code, msg) {
 	resp.writeHead(code, { "Content-Type": "text/plain" });
-	resp.write(msg)
+	resp.write(msg);
 	resp.end();
 }
 
